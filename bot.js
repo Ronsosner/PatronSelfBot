@@ -40,6 +40,8 @@ bot.on("message", function(message) {
                 .setDescription("Hello, this is an rich embed")
                 .addField("I'm PatronBot:smiley:")
                 .addField("created by Ron{Owner}:wink:")
+                .addField("Contact the server team if there is any problem")
+                .setColor("#427df4")
             message.channel.sendEmbed(embed);
             break;
         default:
