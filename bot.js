@@ -35,7 +35,7 @@ bot.on("message", function(message) {
             else message.channel.sendMessage("Can't read that");
             break;
         default:
-            message.channel.sendMessage("Invlid command");
+            message.channel.sendMessage("Invalid command");
     }
 });
 
