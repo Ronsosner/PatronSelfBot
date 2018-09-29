@@ -31,9 +31,9 @@ bot.on("message", function(message) {
             message.channel.sendMessage("I'm PatronBot :smiley: , created by Ron{Owner}:wink: ");
             break;
         case "8ball":
-            if (args[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]); else {
-                message.channel.sendMessage("Can't read that");
-            }
+            if (args[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]); 
+            else message.channel.sendMessage("Can't read that");
+            break;
         default:
             message.channel.sendMessage("Invlid command");
     }
