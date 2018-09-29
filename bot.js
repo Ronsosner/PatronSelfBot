@@ -37,7 +37,6 @@ bot.on("message", function(message) {
             break;
         case "embed":
             var embed = new Discord.RichEmbed()
-                .setDescription("Hello, this is an rich embed..")
                 .setDescription("Bot name:")
                 .addField("I'm PatronBot:smiley:")
                 .setDescription("Created By:")
