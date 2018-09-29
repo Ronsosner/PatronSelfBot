@@ -38,9 +38,9 @@ bot.on("message", function(message) {
         case "embed":
             var embed = new Discord.RichEmbed()
                 .setDescription("Hello, this is an rich embed..")
-                .addField("I'm PatronBot:smiley:","Name bot:", true)
-                .addField("created by Ron{Owner}:wink:", "Created By:", true)
-                .addField("Contact the server team if there is any problem:grin:", "For help:", true)
+                .addField("I'm PatronBot:smiley:","________________________", true)
+                .addField("created by Ron{Owner}:wink:", "________________________", true)
+                .addField("Contact the server team if there is any problem:grin:", "________________________", true)
                 .setColor("#427df4");
             message.channel.sendEmbed(embed);
             break;
