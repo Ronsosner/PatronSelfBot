@@ -7,7 +7,8 @@ var fortunes = [
     "Yes",
     "No",
     "Maybe",
-    "IDK"
+    "IDK",
+    "Fuck U ALL"
 ];
 
 var bot = new Discord.Client();
@@ -28,11 +29,18 @@ bot.on("message", function(message) {
             message.channel.sendMessage("Pong:ping_pong: ");
             break;
         case "info":
-            message.channel.sendMessage("I'm PatronBot :smiley: , created by Ron{Owner}:wink: ");
+            message.channel.sendMessage("I'm PatronBot:smiley:, created by Ron{Owner}:wink:");
             break;
         case "8ball":
             if (args[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]); 
             else message.channel.sendMessage("Can't read that");
+            break;
+        case "embed":
+            var embed = new Discord.RichEmbed()
+                .setDescription("Hello, this is an rich embed")
+                .addField("I'm PatronBot:smiley:")
+                .addField("created by Ron{Owner}:wink:")
+            message.channel.sendEmbed(embed);
             break;
         default:
             message.channel.sendMessage("Invalid command");
