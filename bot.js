@@ -66,10 +66,10 @@ bot.on("message", function(message) {
             message.channel.sendMessage(message.author.toString() + "Staff");
             break;
         case "removerole":
-            message.member.removeRole(member.member.guild.roles.find("name", "Member", "Support", "Bot", "Admin"));
+            message.member.removeRole(member.member.guild.roles.find("name", "Support"));
             break;
         case "deleterole":
-            message.member.guild.roles.find("name", "Member", "Support", "Bot", "Admin").delete();
+            message.member.guild.roles.find("name", "Support").delete();
             break;
         default:
             message.channel.sendMessage("Invalid command");
