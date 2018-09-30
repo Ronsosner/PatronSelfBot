@@ -41,9 +41,6 @@ bot.on("message", function(message) {
     if (message.author.equals(bot.user)) return;
 
     if (!message.content.startsWith(PREFIX)) return;
-    
-    if (message.content === "credits") {
-        message.channel.sendMessage("Ron{Owner}, Nehoray{Admin}, Itamar{Admin}");
     }
 
     var arguments = message.content.substring(PREFIX.length).split(" ");
@@ -71,6 +68,9 @@ bot.on("message", function(message) {
             break;
         case "noticeme":
             message.channel.sendMessage(message.author.toString() + "Staff");
+            break;
+        case "credits":
+            message.channle.sendMessage(Ron{Owner}, Nehoray{Admin}, Itamar{Admin});
             break;
             default:
                 message.channel.sendMessage("Invalid command");
