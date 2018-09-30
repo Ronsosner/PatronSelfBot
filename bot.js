@@ -7,8 +7,7 @@ var fortunes = [
     "Yes",
     "No",
     "Maybe",
-    "IDK",
-    "Fuck U ALL"
+    "IDK"
 ];
 
 var bot = new Discord.Client();
@@ -41,8 +40,12 @@ bot.on("message", function(message) {
                 .addField("I'm PatronBot:smiley:", "__________",true)
                 .addField("created by Ron{Owner}:wink:", "__________",true)
                 .addField("Contact the server team if there is any problem:grin:", "__________",true)
-                .setColor("#427df4");
+                .setColor("#427df4")
+                .setThumbnail(message.author.avatarURL)
             message.channel.sendEmbed(embed);
+            break;
+        case "noticeme":
+            message.channel.sendMessage(message.author.toString() + "Staff");
             break;
         default:
             message.channel.sendMessage("Invalid command");
