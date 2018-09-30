@@ -52,9 +52,9 @@ bot.on("message", function(message) {
 
     if (!message.content.startsWith(PREFIX)) return;
 
-    var args = message.content.substring(PREFIX.length).split(" ");
+    var arguments = message.content.substring(PREFIX.length).split(" ");
 
-    switch (args[0].toLowerCase()) {
+    switch (arguments[0].toLowerCase()) {
         case "ping":
             message.channel.sendMessage("Pong:ping_pong: ");
             break;
@@ -62,7 +62,7 @@ bot.on("message", function(message) {
             message.channel.sendMessage("I'm PatronBot:smiley:, created by Ron{Owner}:wink:");
             break;
         case "8ball":
-            if (args[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]); 
+            if (arguments[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]); 
             else message.channel.sendMessage("Can't read that");
             break;
         case "embed":
@@ -79,7 +79,7 @@ bot.on("message", function(message) {
             message.channel.sendMessage(message.author.toString() + "Staff");
             break;
         case "play":
-             if(!args[1]){
+             if(!arguments[1]){
                 message.channel.sendMessage("Give Me A Link!!");
             return;
         }
@@ -92,7 +92,7 @@ bot.on("message", function(message) {
         };
             var server = servers[message.guild.id];
 
-            server.queue.push(args[1]);
+            server.queue.push(arguments[1]);
 
             if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
                 play(connection , message);
