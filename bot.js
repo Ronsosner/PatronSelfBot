@@ -8,16 +8,6 @@ function generateHex() {
     return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-function play (connection , message) {
-    var server = servers[message.guild.id];
-    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-    server.queue.shift();
-    server.dispatcher.on("end" , function(){
-        if(server.queue[0]) play(connection , message);
-        else connection.disconnect();
-    });
-}
-
 var fortunes = [
     "Yes",
     "No",
@@ -78,36 +68,6 @@ bot.on("message", function(message) {
         case "noticeme":
             message.channel.sendMessage(message.author.toString() + "Staff");
             break;
-        case "play":
-             if(!arguments[1]){
-                message.channel.sendMessage("Give Me A Link!!");
-            return;
-        }
-            if(!message.member.voiceChannel){
-                message.channel.sendMessage("Enter To The Voice Channel!!");
-            return;
-        }
-            if(!servers[message.guild.id]) servers[message.guild.id] = {
-                queue: []
-        };
-            var server = servers[message.guild.id];
-
-            server.queue.push(arguments[1]);
-
-            if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-                play(connection , message);
-        });
-            break;
-
-            case "skip":
-                var server = servers[message.guild.id];
-                if(server.dispatcher) server.dispatcher.end();
-                break;
-
-            case "stop":
-                var server = servers[message.guild.id]; 
-                if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-                break;
             default:
                 message.channel.sendMessage("Invalid command");
     }
