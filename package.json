@@ -1,0 +1,20 @@
+{
+  "name": "patronbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "author": "patron",
+  "license": "ISC",
+  "dependencies": {
+    "200": "0.0.1",
+    "discord.js": "^11.4.2",
+    "heroku": "^7.16.0",
+    "logs": "^1.2.2",
+    "nodemon": "^1.18.4",
+    "opusscript": "0.0.6",
+    "ytdl-core": "^0.26.0"
+  }
+}
