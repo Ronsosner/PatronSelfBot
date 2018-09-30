@@ -41,7 +41,7 @@ bot.on("message", function(message) {
                 .addField("created by Ron{Owner}:wink:", "__________",true)
                 .addField("Contact the server team if there is any problem:grin:", "__________",true)
                 .setColor("#427df4")
-                .setThumbnail(message.author.avatarURL)
+                .setThumbnail(message.author.iconURL)
             message.channel.sendEmbed(embed);
             break;
         case "noticeme":
