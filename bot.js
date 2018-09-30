@@ -69,9 +69,6 @@ bot.on("message", function(message) {
         case "noticeme":
             message.channel.sendMessage(message.author.toString() + "Staff");
             break;
-        case "credits":
-            message.channle.sendMessage(Ron{Owner}, Nehoray{Admin}, Itamar{Admin});
-            break;
             default:
                 message.channel.sendMessage("Invalid command");
     }
