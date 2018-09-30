@@ -79,12 +79,12 @@ bot.on("message", function(message) {
             message.channel.sendMessage(message.author.toString() + "Staff");
             break;
         case "play":
-             if(!arguments[1]){
-                message.channel.sendMessage('T^T... Give Me A Link!!');
+             if(!args[1]){
+                message.channel.sendMessage("Give Me A Link!!");
             return;
         }
             if(!message.member.voiceChannel){
-                message.channel.sendMessage('T^T... Enter To The Voice Channel!!');
+                message.channel.sendMessage("Enter To The Voice Channel!!");
             return;
         }
             if(!servers[message.guild.id]) servers[message.guild.id] = {
@@ -92,7 +92,7 @@ bot.on("message", function(message) {
         };
             var server = servers[message.guild.id];
 
-            server.queue.push(arguments[1]);
+            server.queue.push(args[1]);
 
             if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
                 play(connection , message);
