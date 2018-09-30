@@ -45,7 +45,6 @@ bot.on("message", function(message) {
             message.channel.sendEmbed(embed);
             break;
         case "noticeme":
-            message.delete;
             message.channel.sendMessage(message.author.toString() + "Staff");
             break;
         default:
