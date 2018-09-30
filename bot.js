@@ -3,6 +3,10 @@ const Discord = require("discord.js");
 const TOKEN = "NDk1MTkzOTk1ODAzMzYxMjgw.DpFDxw.h4dIuEb7oXPVq2sBwQTpbc7RCHE"
 const PREFIX = "!"
 
+function generateHex() {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
+
 var fortunes = [
     "Yes",
     "No",
@@ -14,6 +18,20 @@ var bot = new Discord.Client();
 
 bot.on("ready", function() {
     console.log("PatronBot ready to go!");
+});
+
+bot.on("guildMemberAdd", function(member) {
+    member.guild.channels.find("name", "general".sendMessage(member.toString) + "Welcom to DisPatrons, enjoy:smiley:");
+
+    member.addRole(member.guild.find("name", "Member", "Support", "Bot", "Admin"));
+
+    member.guild.createRole({
+        name: member.user.username,
+        color: generateHex(),
+        permissions: []
+    }).then(function(role){
+        member.addRole(role);
+    });
 });
 
 bot.on("message", function(message) {
@@ -41,11 +59,18 @@ bot.on("message", function(message) {
                 .addField("created by Ron{Owner}:wink:", "__________",true)
                 .addField("Contact the server team if there is any problem:grin:", "__________",true)
                 .setColor("#427df4")
-                .setThumbnail(message.author.iconURL)
+                .setThumbnail(message.author.avatarURL)
             message.channel.sendEmbed(embed);
             break;
         case "noticeme":
+            message.delete;
             message.channel.sendMessage(message.author.toString() + "Staff");
+            break;
+        case "removerole":
+            message.member.removeRole(member.member.guild.roles.find("name", "Member", "Support", "Bot", "Admin"));
+            break;
+        case "deleterole":
+            message.member.guild.roles.find("name", "Member", "Support", "Bot", "Admin").delete();
             break;
         default:
             message.channel.sendMessage("Invalid command");
