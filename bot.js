@@ -8,6 +8,19 @@ function generateHex() {
     return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
+function play(connection, message) {
+    var server = servers[message.guild.id];
+
+    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
+
+    server.queue.shift();
+
+    server.dispatcher.on("end", function() {
+        if (server.queue[0]) play(connection, message);
+        else connection.disconnect();
+    });
+}
+
 var fortunes = [
     "Yes",
     "No",
@@ -41,11 +54,10 @@ bot.on("message", function(message) {
     if (message.author.equals(bot.user)) return;
 
     if (!message.content.startsWith(PREFIX)) return;
-    }
 
-    var arguments = message.content.substring(PREFIX.length).split(" ");
+    var args = message.content.substring(PREFIX.length).split(" ");
 
-    switch (arguments[0].toLowerCase()) {
+    switch (args[0].toLowerCase()) {
         case "ping":
             message.channel.sendMessage("Pong:ping_pong: ");
             break;
@@ -53,7 +65,7 @@ bot.on("message", function(message) {
             message.channel.sendMessage("I'm PatronBot:smiley:, created by Ron{Owner}:wink:");
             break;
         case "8ball":
-            if (arguments[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]); 
+            if (args[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]); 
             else message.channel.sendMessage("Can't read that");
             break;
         case "embed":
@@ -69,8 +81,41 @@ bot.on("message", function(message) {
         case "noticeme":
             message.channel.sendMessage(message.author.toString() + "Staff");
             break;
-            default:
-                message.channel.sendMessage("Invalid command");
+        case "play":
+            if (!args[1]) {
+                message.channel.sendMessage("Please provide a link");
+                return;
+            }
+
+            if (!message.member.voiceChannel) {
+                message.channel.sendMessage("You must be in a voice channle");
+                return;
+            }
+
+            if(!servers[message.guild.id]) servers[message.guild.id] = {
+                queue: []
+            };
+
+            var server = servers[message.guild.id];
+
+            server.queue.push(args[1]);
+
+            if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+                play(connection, message);
+            })
+            break;
+        case "skip":
+            var server = servers[message.guild.id];
+
+            if (server.dispatcher) server.dispatcher.end();
+            break;
+        case "stop":
+            var server = servers[message.guild.id];
+
+            if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
+            break;
+        default:
+            message.channel.sendMessage("Invalid command");
     }
 });
 
