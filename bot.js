@@ -23,7 +23,7 @@ bot.on("ready", function() {
 bot.on("guildMemberAdd", function(member) {
     member.guild.channels.find("name", "general".sendMessage(member.toString) + "Welcom to DisPatrons, enjoy:smiley:");
 
-    member.addRole(member.guild.find("name", "Member", "Support", "Bot", "Admin"));
+    member.addRole(member.guild.find("name", "Member"));
 
     member.guild.createRole({
         name: member.user.username,
